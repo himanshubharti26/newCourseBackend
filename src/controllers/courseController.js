@@ -47,6 +47,7 @@ exports.updateCourse = async(req, res) =>{
 
 exports.getCourseById = async(req, res)=>{
     try{
+        console.log("received param in getCourseById", req.params.id);
         const courseId = req.params.id;
         const course = await courseService.getCourseById(courseId);
         res.status(200).send(course);

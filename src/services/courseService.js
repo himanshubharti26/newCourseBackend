@@ -57,7 +57,7 @@ exports.searchByCategory =async (searchTerm)=>{
 
 exports.getCourseById = async(id)=>{
     try{
-        const course = await courseModel.findOne({id});
+        const course = await courseModel.findOne({courseId:id});
         return course;
     }catch(err){
         throw new HttpException(404,"course not found");
@@ -67,13 +67,13 @@ exports.getCourseById = async(id)=>{
 exports.updateCourse = async (courseData)=>{
 
     try{
-        const course =await this.getCourseById(courseData.id);
+        const course =await this.getCourseById(courseData.courseId);
     if(!course){
         throw new HttpException(404,"course not found"); 
     }  
     
     
-    const updatedCourse = await courseModel.findOneAndUpdate({id:courseData.id}, {"$set":courseData}, {new:true});
+    const updatedCourse = await courseModel.findOneAndUpdate({courseId:courseData.courseId}, {"$set":courseData}, {new:true});
     
     return updatedCourse;
     }catch(err){
