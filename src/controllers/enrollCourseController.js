@@ -23,7 +23,7 @@ exports.unrollCourse = async(req, res)=>{
 
 exports.getUserCourses = async(req, res)=>{
     try{
-        const userId = req.param.userId;
+        const userId = req.params.userId;
         const courses = await enrollmentService.getEnrolledCourses(userId);
         res.status(200).send(courses);
     }catch(err){

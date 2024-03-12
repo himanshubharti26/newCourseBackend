@@ -4,7 +4,7 @@ const courseController = require('../controllers/courseController');
 
 courseRouter.get('/',courseController.getCourses)
 .post('/', courseController.createCourse);
-courseRouter.get('/search/:query',courseController.findCourses);
+courseRouter.get('/search/:searchterm',courseController.findCourses);
 courseRouter.get('/:id', courseController.getCourseById);
 courseRouter.put('/', courseController.updateCourse);
 

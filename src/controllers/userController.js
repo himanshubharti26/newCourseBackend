@@ -12,7 +12,7 @@ exports.createUser = async(req, res)=>{
 
 exports.getUserById = async(req, res)=>{
     try{
-        const userId = req.param.id;
+        const userId = req.params.id;
         const user = await userService.getUserById(userId);
         res.status(200).send(user);
     }catch(err){
