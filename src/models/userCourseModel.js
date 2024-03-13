@@ -8,7 +8,7 @@ const userCourseSchema = new mongoose.Schema({
     },
     courseId:{
         type:Number,
-        required:true
+        required:true,
     },
     progress:{
         type:Number,
@@ -20,7 +20,7 @@ const userCourseSchema = new mongoose.Schema({
     //     type:Boolean,
     //     default:false
     // }
-    courseDetail:{ type: mongoose.Schema.Types.ObjectId, ref: 'courseModel' }
+
 }, {timestamps:true});
 
 const userCourseModel = mongoose.model('userCourse', userCourseSchema);

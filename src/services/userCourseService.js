@@ -31,7 +31,26 @@ exports.getEnrolledCourses = async(userId)=>{
             throw new HttpException(404, "user not found");
         }
 
-        let enrolledCourses = await userCourseModel.find({userId}).populate('courseDetail');
+        let enrolledCourses = await userCourseModel.aggregate(
+            [
+                {
+                    $match:{userId}
+                },
+                {
+                    $lookup:{
+                        from:"courses",
+                        localField:"courseId",
+                        foreignField:"courseId",
+                        as: "courseDetail"
+                    }
+                },
+                {
+                    $unwind:"$courseDetail"
+                },
+                
+
+            ]
+        );
 
         console.log("fetched enrolled courses",enrolledCourses);
     //    const enrolledCourses =  courseIds.map(async(course)=>{
@@ -41,18 +60,18 @@ exports.getEnrolledCourses = async(userId)=>{
     //    });
 
      return  enrolledCourses.map(course=>({
-        courseId:course.courseId.courseId,
-        title:course.courseId.title,
-        description:course.courseId.description,
-        instructor:course.courseId.instructor,
+        courseId:course.courseDetail.courseId,
+        title:course.courseDetail.title,
+        description:course.courseDetail.description,
+        instructor:course.courseDetail.instructor,
         progress:course.progress,
-        rating: course.courseId.rating,
-        image:course.courseId.image
+        rating: course.courseDetail.rating,
+        image:course.courseDetail.image
     }));
 
 
     }catch(err){
-        throw new HttpException(500, "Internal Server error");
+        throw new HttpException(500, `Internal Server error:${err}`);
     }
 }   
 
