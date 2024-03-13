@@ -24,6 +24,7 @@ exports.unrollCourse = async(req, res)=>{
 exports.getUserCourses = async(req, res)=>{
     try{
         const userId = req.params.userId;
+        console.log("extracted user id",userId);
         const courses = await enrollmentService.getEnrolledCourses(userId);
         res.status(200).send(courses);
     }catch(err){

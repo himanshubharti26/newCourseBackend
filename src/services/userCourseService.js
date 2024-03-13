@@ -18,7 +18,8 @@ exports.enrollCourse = async(userId, courseId)=>{
         if (err.name === 'HttpException') {
             throw err;
         } else {
-            throw new HttpException(500, "Internal Server Error");
+            console.e
+            throw new HttpException(500, err);
         }
     }
 }
@@ -30,9 +31,9 @@ exports.getEnrolledCourses = async(userId)=>{
             throw new HttpException(404, "user not found");
         }
 
-        let enrolledCourses = await userCourseModel.find({userId}).populate('courseId');
+        let enrolledCourses = await userCourseModel.find({userId}).populate('courseDetail');
 
-
+        console.log("fetched enrolled courses",enrolledCourses);
     //    const enrolledCourses =  courseIds.map(async(course)=>{
     //         let courseDetails = await courseModel.findOne({courseId:course.courseId});
     //         courseDetails.progress = course.progress;
@@ -45,7 +46,8 @@ exports.getEnrolledCourses = async(userId)=>{
         description:course.courseId.description,
         instructor:course.courseId.instructor,
         progress:course.progress,
-        rating: course.courseId.rating
+        rating: course.courseId.rating,
+        image:course.courseId.image
     }));
 
 

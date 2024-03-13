@@ -1,18 +1,23 @@
 const HttpException = require("../HttpException");
 const userModel = require("../models/userModel")
 const bcrypt = require('bcrypt');
-
+const { v4 } = require('uuid');
 
 exports.createUser = async(userData)=>{
     try{
-        const hashedPass = bcrypt.hash(userData.password, 10);
+        console.log("User Data before ==>",userData);
+        const hashedPass = await bcrypt.hash(userData.password, 10);
+        console.log("User Data after ==>",userData);
         userData.password = hashedPass;
+        userData.userId = v4();
+        console.log("User Data ==>",userData);
         const user = await userModel.create(userData);
         return user;
     }catch(err){
-        throw new HttpException(500, "Error creating user");
+        throw new HttpException(500, `Error creating user: ${err}`);
     }
 }
+
 
 exports.updateUser = async(updateData)=>{
     try{

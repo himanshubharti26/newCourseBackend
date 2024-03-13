@@ -3,6 +3,7 @@ const userService = require("../services/userService");
 exports.createUser = async(req, res)=>{
     try{
         const userData = req.body;
+        console.log("User Data controller==>",userData);
         const  user = await userService.createUser(userData);
         res.status(201).send(user);
     }catch(err){

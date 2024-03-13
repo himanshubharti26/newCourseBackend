@@ -20,7 +20,8 @@ const userCourseSchema = new mongoose.Schema({
     //     type:Boolean,
     //     default:false
     // }
-    
+    courseDetail:{ type: mongoose.Schema.Types.ObjectId, ref: 'courseModel' }
 }, {timestamps:true});
 
 const userCourseModel = mongoose.model('userCourse', userCourseSchema);
+module.exports = userCourseModel;
