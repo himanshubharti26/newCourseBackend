@@ -3,7 +3,7 @@ const Logger = require('logger')
 
 const connectDB = async()=>{
     try{
-        const url = "mongodb://0.0.0.0:27017/trusity"
+        const url = "mongodb+srv://himanshubharti9626:mongopassword9626@cluster1.grhhtjg.mongodb.net/trusity"
         const conn = await mongoose.connect(url);
         console.log("MongoDB connected Successfully")
     }catch(err){
