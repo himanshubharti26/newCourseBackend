@@ -6,7 +6,7 @@ exports.enrollCourse = async(req, res)=>{
         const enrolled = await enrollmentService.enrollCourse(userId, courseId);
         res.status(201).send(enrolled);
     }catch(err){
-        throw err;
+       return err;
     }
 
 }
@@ -17,7 +17,7 @@ exports.unrollCourse = async(req, res)=>{
         const unrolled =  await enrollmentService.unrollCourse(userId, courseId); 
         res.status(200).send(unrolled);
     }catch(err){
-        throw err;
+        return err;
     }
 }
 
@@ -28,6 +28,6 @@ exports.getUserCourses = async(req, res)=>{
         const courses = await enrollmentService.getEnrolledCourses(userId);
         res.status(200).send(courses);
     }catch(err){
-        throw err;
+        return err;
     }
 }

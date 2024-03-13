@@ -7,7 +7,7 @@ exports.createUser = async(req, res)=>{
         const  user = await userService.createUser(userData);
         res.status(201).send(user);
     }catch(err){
-        throw err;
+        return err;
     }
 }
 
@@ -17,7 +17,7 @@ exports.getUserById = async(req, res)=>{
         const user = await userService.getUserById(userId);
         res.status(200).send(user);
     }catch(err){
-        throw err;
+        return err;
     }
 }
 
@@ -27,6 +27,6 @@ exports.updateUser = async(req, res)=>{
         const updatedUser = await userService.updateUser(updateData);
         res.status(200).send(updatedUser);
     }catch(err){
-        throw err;
+        return err;
     }
 }
